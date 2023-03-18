@@ -1,0 +1,85 @@
+.AddNewsForm{
+    padding-top: 60px;
+}
+
+.AddNewsForm p {
+    margin: 0;
+    font-weight: bold;
+}
+
+.AddNewsForm_from{
+    background: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.AddNewsForm_from_content{
+    margin: 5px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 5px;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 600px;
+    width: 100%;
+    background-color: bisque;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.AddNewsForm_from_content input{
+    max-width: 600px;
+    width: 70%;
+    padding: 6px 10px;
+    border: 1px solid black;
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+}
+
+.AddNewsForm_from_content input :focus{
+    outline-color: rgb(55, 161, 231);
+}
+
+.AddNewsForm_from_content textarea{
+    padding: 6px 10px;
+    border: 1px solid black;
+    font-family: 'Kanit', sans-serif;
+    box-sizing: border-box;
+    max-width: 500px;
+    height: 250px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.News_input:focus{
+    outline-color: rgb(55, 161, 231);
+    border: 1px solid rgb(55, 161, 231);
+}
+
+.Add_file_button{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    border: none;
+    background: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/add_button.png');
+    transition: 0.1s;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.Add_file_button:hover{
+    transform: scale(1.1);
+}
+
+.FileInput {
+    display: none;
+}

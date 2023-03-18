@@ -1,0 +1,30 @@
+.Header{
+    margin-bottom: 5px;
+    background: rgb(84, 83, 83);
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+}
+
+.Header_inner_container{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.NavLink_container{
+    max-width: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Header_link{
+    color: white;
+}
