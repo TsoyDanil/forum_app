@@ -14,7 +14,8 @@ const App: FunctionComponent = (): ReactElement => {
           <Route path="/" element={<MainNewsPage/>}/>
           <Route path="/news/:id" element={<FullNewsBlock/>}/>
           <Route path="/news-form" element={<AddNewsForm/>}/>
-          <Route path="*" element={<h1>Page not Found</h1>}/>
+          <Route path="*" 
+            element={<h1 style={{paddingTop: '50px', textAlign: 'center'}}>Page not Found</h1>}/>
         </Routes>
       </Layout>
     </>

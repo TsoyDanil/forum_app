@@ -1,0 +1,43 @@
+.CommentBlock {
+    border: 1px solid #bab8b8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+.CommentBlock p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.CommentBlock h2 {
+    color: #6e6d6d;
+    margin: 0;
+}
+
+.CommentBlock:last-child {
+    margin-bottom: 0px;
+}
+
+.Remove_button{
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/delete-button.png');
+    transition: 0.1s;
+}
+
+.Remove_button:hover{
+    transform: scale(1.1);
+}
