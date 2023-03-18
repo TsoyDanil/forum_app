@@ -110,7 +110,7 @@ const FullNewsBlock: FunctionComponent = (): ReactElement => {
                                         deleteComment = {() => {deleteCommentHandler(comment._id)}}
                                     />
                             })
-                            : <h3>No comments yet</h3>
+                            : <p>No comments yet</p>
                     }
                 </>
                 : <h1 style={{textAlign: 'center'}}>No Data Found</h1>
