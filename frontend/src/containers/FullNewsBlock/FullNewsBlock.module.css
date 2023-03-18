@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.FullNewsBlock h1{
+    margin: 10px 0;
+}
+
 .AddComment_form{
     display: flex;
     flex-direction: column;

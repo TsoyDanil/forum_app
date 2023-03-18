@@ -1,13 +1,16 @@
 import { ChangeEvent, FormEvent, FunctionComponent, ReactElement, useEffect, useState } from "react";
-import INews from "../../interfaces/INews";
+import { shallowEqual, useSelector } from "react-redux";
+import Preloader from "../../components/UI/Prealoder/Preloader";
 import INewsDto from "../../interfaces/INewsDto";
 import { addNews } from "../../store/news/news.slice";
-import { useAppDispatch } from "../../store/store";
+import { AppState, useAppDispatch } from "../../store/store";
 import styles from './AddNewsForm.module.css'
 
 const AddNewsForm: FunctionComponent = (): ReactElement => {
 
     const dispatch = useAppDispatch()
+
+    const {newsLoading} = useSelector((state: AppState) => state.news)
 
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(true)
 
@@ -60,6 +63,11 @@ const AddNewsForm: FunctionComponent = (): ReactElement => {
 
     return(
         <div className={styles.AddNewsForm}>
+            {
+                newsLoading ? 
+                <Preloader/> :
+                null
+            }
             <div className={styles.AddNewsForm_from}>
                 <form onSubmit={handleSubmit}>
                     <div className={styles.AddNewsForm_from_content}>
@@ -70,6 +78,7 @@ const AddNewsForm: FunctionComponent = (): ReactElement => {
                             name={'header'} 
                             value={newsDto.header}
                             placeholder={'Add header...'}
+                            autoComplete={'off'}
                         />
                         <p>Content</p>
                         <textarea

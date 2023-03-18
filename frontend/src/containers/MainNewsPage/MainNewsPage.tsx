@@ -3,6 +3,7 @@ import { FunctionComponent, ReactElement, useEffect } from "react";
 import { shallowEqual, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import NewsBlock from "../../components/NewsBlock/NewsBlock";
+import Preloader from "../../components/UI/Prealoder/Preloader";
 import INews from "../../interfaces/INews";
 import { deleteNews, getNews, getNewsById } from "../../store/news/news.slice";
 import { AppState, useAppDispatch } from "../../store/store";
@@ -31,6 +32,11 @@ const MainNewsPage: FunctionComponent = (): ReactElement => {
 
     return(
         <div className={styles.MainNewsPage}>
+            {
+                newsLoading ? 
+                <Preloader/> :
+                null
+            }
             {
                 newsList.length ? 
                 newsList.map((newsData: INews) => {

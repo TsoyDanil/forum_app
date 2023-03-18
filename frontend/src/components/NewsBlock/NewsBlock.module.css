@@ -12,6 +12,11 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    transition: 0.1s;
+}
+
+.NewsBlock:hover{
+    background: rgb(238, 233, 221);
 }
 
 .PinImage{

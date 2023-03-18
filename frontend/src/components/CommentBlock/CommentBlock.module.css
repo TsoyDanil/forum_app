@@ -11,6 +11,12 @@
     margin-bottom: 20px;
     padding: 20px;
     position: relative;
+    transition: 0.1s;
+    transition: 0.1s;
+}
+
+.CommentBlock:hover{
+    background: rgb(238, 233, 233);
 }
 
 .CommentBlock p {

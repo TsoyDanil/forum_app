@@ -68,36 +68,52 @@ const FullNewsBlock: FunctionComponent = (): ReactElement => {
         <div className={styles.FullNewsBlock}>
             {
                 targetedNews ? 
-                <div className={styles.News_content}>
-                    <h1>{targetedNews.header}</h1>
-                    <p>At {new Date(targetedNews.timestamp).toLocaleString()}</p>
-                    <p>{targetedNews.content}</p>
-                </div>
-                : <h1>No Data Found</h1>
-            }
-            <div>
-                <h1>Add comment</h1>
-                <form className={styles.AddComment_form} onSubmit={submitHandler}>
-                        <p>Author:</p>
-                        <input name={'author'} onChange={handlerInputInsert} type={'text'} value={commentDto.author} placeholder={'Add author name...'}/>
-                        <p>Comment:</p>
-                        <input name={'comment'} onChange={handlerInputInsert} type={'text'} value={commentDto.comment} placeholder={'Add comment here...'}/>
-                        <button
-                            disabled={buttonDisabled}
-                        >Add comment</button>
-                </form>
-            </div>
-            <h1>Comments</h1>
-            {
-                commentsList.length ? 
-                commentsList.map((comment: IComment) => {
-                    return <CommentBlock
-                                key={comment._id.toString()}
-                                commentData = {comment}
-                                deleteComment = {() => {deleteCommentHandler(comment._id)}}
+                <>
+                    <div className={styles.News_content}>
+                        <h1>{targetedNews.header}</h1>
+                        <p>At {new Date(targetedNews.timestamp).toLocaleString()}</p>
+                        <p>{targetedNews.content}</p>
+                    </div>
+                    <div>
+                        <h1>Add comment</h1>
+                        <form className={styles.AddComment_form} onSubmit={submitHandler}>
+                            <p>Author:</p>
+                            <input 
+                                name={'author'} 
+                                onChange={handlerInputInsert} 
+                                type={'text'} 
+                                value={commentDto.author} 
+                                placeholder={'Add author name...'}
+                                autoComplete={'off'}
                             />
-                })
-                : <h3>No comments yet</h3>
+                            <p>Comment:</p>
+                                <input 
+                                    name={'comment'} 
+                                    onChange={handlerInputInsert} 
+                                    type={'text'} 
+                                    value={commentDto.comment} 
+                                    placeholder={'Add comment here...'}
+                                    autoComplete={'off'}
+                                />
+                                <button
+                                    disabled={buttonDisabled}
+                                >Add comment</button>
+                        </form>
+                    </div>
+                    <h1>Comments</h1>
+                    {
+                        commentsList.length ? 
+                        commentsList.map((comment: IComment) => {
+                            return <CommentBlock
+                                        key={comment._id.toString()}
+                                        commentData = {comment}
+                                        deleteComment = {() => {deleteCommentHandler(comment._id)}}
+                                    />
+                            })
+                            : <h3>No comments yet</h3>
+                    }
+                </>
+                : <h1 style={{textAlign: 'center'}}>No Data Found</h1>
             }
         </div>
     )
