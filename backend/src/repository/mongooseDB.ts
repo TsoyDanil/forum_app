@@ -31,6 +31,75 @@ export class MongooseDB {
         }
     }
 
-    
+    public getComments = async(req: Request): Promise<IResponse<IComment[] | IComment | null>> => {
+        try{
+            let data
+            if (req.query.news_id){
+                data = await Comment.find({news_id: req.query.news_id})
+            } else{
+                data = await Comment.find()
+            }
+            if (!data) throw new Error('No comments found')
+            const response: IResponse<IComment[] | IComment> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Comments found'
+            }
+            return response
+        } catch(err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
+    public addComment = async(commentDto: ICommentDto): Promise<IResponse<IComment | null>> => {
+        try{
+            const isExist = await News.exists({_id: commentDto.news_id})
+            if (!isExist) throw new Error('News with stated is does not exist')
+            const comment = new Comment(commentDto)
+            const data = await comment.save()
+            const response: IResponse<IComment | null> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Comment added'
+            }
+            return response
+        } catch(err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
+    public deleteCommentById = async(id: string): Promise<IResponse<IComment | null>> => {
+        try{
+            const data = await Comment.findOneAndDelete({_id: id})
+            if (!data) throw new Error('No comment found')
+            const response: IResponse<IComment> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Deleted successfully'
+            }
+            return response
+        } catch(err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
 }
 
+export const mongooseDB = new MongooseDB()
