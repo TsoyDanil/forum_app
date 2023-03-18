@@ -33,9 +33,8 @@ export const getNewsById = createAppAsyncThunk(
 
 export const addNews = createAppAsyncThunk(
     `${namespace}/addNews`,
-    async (newsDto: FormData, {dispatch}) => {
-        await newsApi.addNews(newsDto)
-        dispatch(getNews())
+    async (newsDto: FormData) => {
+        return await newsApi.addNews(newsDto)
     }
 )
 
@@ -115,8 +114,9 @@ export const newsSlice = createSlice({
         .addCase(addNews.rejected, (state) => {
             state.newsLoading = false
         })
-        .addCase(addNews.fulfilled, (state) => {
+        .addCase(addNews.fulfilled, (state, action) => {
             state.newsLoading = false
+            if (action.payload.result) state.newsList.push(action.payload.result)
         })
         .addCase(getCommentByNewsId.pending, (state) => {
             state.newsLoading = true

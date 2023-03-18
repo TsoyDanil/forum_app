@@ -28,7 +28,6 @@ const FullNewsBlock: FunctionComponent = (): ReactElement => {
     const {targetedNews, newsLoading, commentsList} = useSelector((state: AppState) => state.news, shallowEqual)
 
     const deleteCommentHandler = (id: Types.ObjectId) => {
-        console.log(id);
         dispatch(deleteComment(id))
     }
 
