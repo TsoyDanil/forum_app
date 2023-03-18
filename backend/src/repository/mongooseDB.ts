@@ -31,6 +31,91 @@ export class MongooseDB {
         }
     }
 
+    public getNews = async(): Promise<IResponse<INews[] | null>> => {
+        try{
+            const data = await News.find().select('-content')
+            const response: IResponse<INews[]> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Found news'
+            }
+            return response
+        } catch (err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
+    public getNewsById = async(id: string): Promise<IResponse<INews | null>> => {
+        try{
+            const data = await News.findById(id)
+            if (!data) throw new Error('No news found')
+            const response: IResponse<INews> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Found news'
+            }
+            return response
+        } catch (err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
+    public addNews = async (newsDto: INewsDto): Promise<IResponse<INews | null>> => {
+        try{
+            if (newsDto.header.trim() === '' || newsDto.content.trim() === '') throw new Error('Required fields are empty')
+            const news = new News(newsDto)
+            const data = await news.save()
+            const response: IResponse<INews> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'New created successfully'
+            }
+            return response
+        } catch (err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
+    public deleteNewsById = async(id: string): Promise<IResponse<INews | null>> => {
+        try{
+            const data = await News.findOneAndDelete({_id: id})
+            await Comment.deleteMany({news_id: id})
+            if (!data) throw new Error('No news found')
+            const response: IResponse<INews> = {
+                status: EStatuses.SUCCESS,
+                result: data,
+                message: 'Deleted successfully'
+            }
+            return response
+        } catch (err: unknown){
+            const error = err as Error 
+            const response: IResponse<null> = {
+                status: EStatuses.FAILURE,
+                result: null,
+                message: error.message
+            }
+            return response
+        }
+    }
+
     public getComments = async(req: Request): Promise<IResponse<IComment[] | IComment | null>> => {
         try{
             let data
