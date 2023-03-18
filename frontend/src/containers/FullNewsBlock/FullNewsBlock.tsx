@@ -3,6 +3,7 @@ import { ChangeEvent, FunctionComponent, ReactElement, useEffect, useState, Form
 import { shallowEqual, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import CommentBlock from "../../components/CommentBlock/CommentBlock";
+import Preloader from "../../components/UI/Prealoder/Preloader";
 import IComment from "../../interfaces/IComment";
 import ICommentDto from "../../interfaces/ICommentDto";
 import INews from "../../interfaces/INews";
@@ -66,6 +67,9 @@ const FullNewsBlock: FunctionComponent = (): ReactElement => {
 
     return(
         <div className={styles.FullNewsBlock}>
+            {
+                newsLoading ? <Preloader/> : null
+            }
             {
                 targetedNews ? 
                 <>
