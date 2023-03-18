@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import cors from 'cors';
 import { mongooseDB } from "./repository/mongooseDB";
 import { HealthCheckController } from "./controllers/healthCheck";
+import { NewsController } from "./controllers/newsController";
 
 class App {
     private app: Express
@@ -15,7 +16,7 @@ class App {
     public init = async(): Promise<void> => {
         try{
             this.app.use('/health-check', new HealthCheckController().getRouter())
-
+            this.app.use('/news', new NewsController().getRouter())
             this.app.listen(process.env.APP_PORT, () => {
                 console.log(`Server is running on http://localhost:${process.env.APP_PORT}`)
             })

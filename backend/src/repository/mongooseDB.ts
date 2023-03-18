@@ -31,31 +31,16 @@ export class MongooseDB {
         }
     }
 
-    public getNews = async(): Promise<IResponse<INews[] | null>> => {
+    public getNews = async(req: Request): Promise<IResponse<INews[] | INews | null>> => {
         try{
-            const data = await News.find().select('-content')
-            const response: IResponse<INews[]> = {
-                status: EStatuses.SUCCESS,
-                result: data,
-                message: 'Found news'
+            let data
+            if (req.params.id){
+                data = await News.findById(req.params.id)
+            } else{
+                data = await News.find().select('-content')
             }
-            return response
-        } catch (err: unknown){
-            const error = err as Error 
-            const response: IResponse<null> = {
-                status: EStatuses.FAILURE,
-                result: null,
-                message: error.message
-            }
-            return response
-        }
-    }
-
-    public getNewsById = async(id: string): Promise<IResponse<INews | null>> => {
-        try{
-            const data = await News.findById(id)
             if (!data) throw new Error('No news found')
-            const response: IResponse<INews> = {
+            const response: IResponse<INews[] | INews> = {
                 status: EStatuses.SUCCESS,
                 result: data,
                 message: 'Found news'
