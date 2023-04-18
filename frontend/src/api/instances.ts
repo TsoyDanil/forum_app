@@ -1,9 +1,10 @@
 import axios from "axios";
+import { baseUrl } from "./baseUrl";
 
 export const newsInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL + 'news'
+    baseURL: baseUrl + 'news'
 })
 
 export const commentsInstance = axios.create({
-    baseURL: import.meta.env.VITE_BASE_URL + 'comments'
+    baseURL: baseUrl + 'comments'
 })

@@ -4,6 +4,7 @@ import { mongooseDB } from "./repository/mongooseDB";
 import { HealthCheckController } from "./controllers/healthCheck";
 import { NewsController } from "./controllers/newsController";
 import { CommentsController } from "./controllers/commentsController";
+import { config } from "./index.config";
 
 class App {
     private app: Express
@@ -19,8 +20,8 @@ class App {
             this.app.use('/health-check', new HealthCheckController().getRouter())
             this.app.use('/news', new NewsController().getRouter())
             this.app.use('/comments', new CommentsController().getRouter())
-            this.app.listen(process.env.APP_PORT, () => {
-                console.log(`Server is running on http://localhost:${process.env.APP_PORT}`)
+            this.app.listen(config.port, () => {
+                console.log(`Server is running on http://localhost:${config.port}`)
             })
             await mongooseDB.init()
             process.on('exit', () => {

@@ -9,6 +9,7 @@ import INewsDto from '../interfaces/INewsDto';
 import IResponse from '../interfaces/IResponse';
 import { Comment } from '../models/Comment';
 import { News } from '../models/News';
+import { config } from '../index.config';
 
 dotenv.config()
 
@@ -23,7 +24,7 @@ export class MongooseDB {
 
     public init = async (): Promise<void> => {
         try {
-            this.client = await mongoose.connect(process.env.MONGO_CLIENT_URL || '')
+            this.client = await mongoose.connect(config.mongoUrl)
             console.log('Server connected to MongoDB');
         } catch (err) {
             const error = err as Error;
